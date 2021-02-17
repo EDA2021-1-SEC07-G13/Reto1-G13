@@ -37,7 +37,11 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("2- Consultar los Top X videos por views, pais y categoria")
+    print("3- Consultar video que más días ha sido trending para un país específico")
+    print("4- Consultar video que más días ha sido trending para una categoría específica.")
+    print("5- Consultar el ranking X de vides con mas likes y tag especifico en un pais.")
+    print("0- Salir")
 
 catalog = None
 
