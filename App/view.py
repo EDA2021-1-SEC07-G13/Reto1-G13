@@ -43,6 +43,39 @@ def printMenu():
     print("5- Consultar el ranking X de vides con mas likes y tag especifico en un pais.")
     print("0- Salir")
 
+def initCatalog():
+    """
+    Inicializa el catalogo de libros
+    """
+    return controller.initCatalog()
+
+def loadData(catalog):
+    """
+    Carga los libros en la estructura de datos
+    """
+    controller.loadData(catalog)
+
+def printcategoriesList(categoryID):
+    size = lt.size(categoryID)
+    listaC=[]
+    if size:
+        print('Esta es la lista de categorias: ')
+        for i in categoryID['elements']:       
+            listaC.append(i['id\tname'])
+    for j in listaC:
+        print(j)
+
+def print1stelement(videos):
+    size = lt.size(videos)
+    if size:
+        print('Este es el primer elemento: ')
+        print(videos['first']['info']['title'] , ',' , videos['first']['info']['channel_title'], ',' , videos['first']['info']['channel_title']  , ',' , videos['first']['info']['trending_date'], ',' , videos['first']['info']['country'], ',' , videos['first']['info']['views'] , ',' , videos['first']['info']['likes'], ',' , videos['first']['info']['dislikes'] )
+    
+    pass
+
+
+
+
 catalog = None
 
 """
@@ -53,10 +86,26 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
+        catalog = initCatalog()
+        loadData(catalog)
+        print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+        videos = catalog['videos']
+        
+        #print('Videos cargados: ' + str((catalog['videos'])))
+        print1stelement(videos)
+        categoryID = catalog['category-id']
+        printcategoriesList(categoryID)
+        
 
     elif int(inputs[0]) == 2:
         pass
-
+    
+    elif int(inputs[0]) == 3:
+        pass
+    elif int(inputs[0]) == 4:
+        pass
+    elif int(inputs[0]) == 5:
+        pass
     else:
         sys.exit(0)
 sys.exit(0)
