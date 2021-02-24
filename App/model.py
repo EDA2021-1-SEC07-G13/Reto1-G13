@@ -37,7 +37,7 @@ los mismos.
 
 # Construccion de modelos
 
-def newCatalog():
+def newCatalog(X):
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar
     todos los libros, adicionalmente, crea una lista vacia para los autores,
@@ -48,7 +48,7 @@ def newCatalog():
                'category-id': None,}
                
 
-    catalog['videos'] = lt.newList()
+    catalog['videos'] = lt.newList(X)
     catalog['category-id'] = lt.newList('ARRAY_LIST')
     return catalog
 

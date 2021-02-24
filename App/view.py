@@ -43,11 +43,11 @@ def printMenu():
     print("5- Consultar el ranking X de vides con mas likes y tag especifico en un pais.")
     print("0- Salir")
 
-def initCatalog():
+def initCatalog(Tipo):
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog()
+    return controller.initCatalog(Tipo)
 
 def loadData(catalog):
     """
@@ -85,8 +85,16 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        Tipo=None
+        input2=input('Ponga 1 si quiere la representacion en tipo arreglo o 2 si la quiere con lista encadenada')
         print("Cargando información de los archivos ....")
-        catalog = initCatalog()
+        if int(input2)==1:
+            Tipo='ARRAY_LIST'
+        elif int(input2)==2:
+            Tipo='LINKED_LIST'
+        else:
+            pass
+        catalog = initCatalog(Tipo)
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         videos = catalog['videos']
