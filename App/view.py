@@ -65,16 +65,25 @@ def printcategoriesList(categoryID):
     for j in listaC:
         print(j)
 
-def print1stelement(videos):
+def print1stelement(videos,tipo):
     size = lt.size(videos)
-    if size:
+    if size and tipo==2:
         print('Este es el primer elemento: ')
         print(videos['first']['info']['title'] , ',' , videos['first']['info']['channel_title'], ',' , videos['first']['info']['channel_title']  , ',' , videos['first']['info']['trending_date'], ',' , videos['first']['info']['country'], ',' , videos['first']['info']['views'] , ',' , videos['first']['info']['likes'], ',' , videos['first']['info']['dislikes'] )
-    
+    if size and tipo ==1:
+        print('Este es el primer elemento: ')
+        print(videos[1]['info']['title'] , ',' , videos[1]['info']['channel_title'], ',' , videos[1]['info']['channel_title']  , ',' , videos[1]['info']['trending_date'], ',' , videos[1]['info']['country'], ',' , videos[1]['info']['views'] , ',' , videos[1]['info']['likes'], ',' , videos[1]['info']['dislikes'] )
     pass
 
-
-
+def printBestVideos(videos):
+    size = lt.size(videos)
+    if size:
+        print(' Estos son los mejores videos: ')
+        for video in lt.iterator(videos):
+            print('Titulo: ' + video['title'] + '  ISBN: ' +
+                  video['isbn'] + ' Rating: ' + video['average_rating'])
+    else:
+        print('No se encontraron videos')
 
 catalog = None
 
@@ -100,14 +109,14 @@ while True:
         videos = catalog['videos']
         
         #print('Videos cargados: ' + str((catalog['videos'])))
-        print1stelement(videos)
+        print1stelement(videos,int(input2))
         categoryID = catalog['category-id']
         printcategoriesList(categoryID)
         
 
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
-        topvideos = controller.getBestBooks(catalog, int(number))
+        topvideos = controller.getBestVideos(catalog, int(number))
         printBestVideos(videos)
     
     elif int(inputs[0]) == 3:

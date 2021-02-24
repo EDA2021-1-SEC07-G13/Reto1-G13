@@ -63,7 +63,7 @@ def loadCategories(catalog):
     for category in input_file:
         model.addCategoryID(catalog, category)
 
-def getBestMovies(catalog,number):
+def getBestVideos(catalog,number):
     bestvideos = model.getBestVideos(catalog, number)
     return bestvideos
 
