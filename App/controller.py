@@ -49,7 +49,7 @@ def loadData(catalog):
     loadCategories(catalog)
 
 def loadVideos(catalog):
-    videosfile = cf.data_dir + 'videos-small.csv'
+    videosfile = cf.data_dir + 'videos-large.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video)
@@ -68,5 +68,7 @@ def getBestVideos(catalog,number):
     return bestvideos
 
 # Funciones de ordenamiento
-
+def sortVideos(catalog, size,typesort):
+    x= model.sortVideos(catalog, size,typesort)
+    return x
 # Funciones de consulta sobre el catálogo

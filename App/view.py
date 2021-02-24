@@ -36,11 +36,11 @@ operación solicitada
 
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- Consultar los Top X videos por views, pais y categoria")
-    print("3- Consultar video que más días ha sido trending para un país específico")
-    print("4- Consultar video que más días ha sido trending para una categoría específica.")
-    print("5- Consultar el ranking X de vides con mas likes y tag especifico en un pais.")
+    print("1- Cargar información en el catálogo ")
+    print("2- Consultar los Top X videos por views, pais y categoria ")
+    print("3- Consultar video que más días ha sido trending para un país específico ")
+    print("4- Consultar video que más días ha sido trending para una categoría específica ")
+    print("5- Consultar el ranking X de vides con mas likes y tag especifico en un pais ")
     print("0- Salir")
 
 def initCatalog(Tipo):
@@ -66,24 +66,10 @@ def printcategoriesList(categoryID):
         print(j)
 
 def print1stelement(videos,tipo):
-    size = lt.size(videos)
-    if size and tipo==2:
-        print('Este es el primer elemento: ')
-        print(videos['first']['info']['title'] , ',' , videos['first']['info']['channel_title'], ',' , videos['first']['info']['channel_title']  , ',' , videos['first']['info']['trending_date'], ',' , videos['first']['info']['country'], ',' , videos['first']['info']['views'] , ',' , videos['first']['info']['likes'], ',' , videos['first']['info']['dislikes'] )
-    if size and tipo ==1:
-        print('Este es el primer elemento: ')
-        print(videos[1]['info']['title'] , ',' , videos[1]['info']['channel_title'], ',' , videos[1]['info']['channel_title']  , ',' , videos[1]['info']['trending_date'], ',' , videos[1]['info']['country'], ',' , videos[1]['info']['views'] , ',' , videos[1]['info']['likes'], ',' , videos[1]['info']['dislikes'] )
-    pass
-
-def printBestVideos(videos):
-    size = lt.size(videos)
-    if size:
-        print(' Estos son los mejores videos: ')
-        for video in lt.iterator(videos):
-            print('Titulo: ' + video['title'] + '  ISBN: ' +
-                  video['isbn'] + ' Rating: ' + video['average_rating'])
-    else:
-        print('No se encontraron videos')
+    primero=lt.firstElement(videos)
+    print("Title: {} Channel: {} Trending Date: {} Country: {} Views: {} Likes: {} Dislikes: {}  ".format(primero['title'],primero["channel_title"],primero["trending_date"],primero["country"],primero["views"],primero["likes"],primero["dislikes"]))
+def sortVideos(catalog, size,typesort):
+    return controller.sortVideos(catalog, size,typesort)
 
 catalog = None
 
@@ -106,18 +92,29 @@ while True:
         catalog = initCatalog(Tipo)
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
-        videos = catalog['videos']
         
-        #print('Videos cargados: ' + str((catalog['videos'])))
+        videos=(catalog['videos'])
         print1stelement(videos,int(input2))
         categoryID = catalog['category-id']
         printcategoriesList(categoryID)
         
 
     elif int(inputs[0]) == 2:
-        number = input("Buscando los TOP ?: ")
-        topvideos = controller.getBestVideos(catalog, int(number))
-        printBestVideos(videos)
+        det=True
+        while det==True:
+            muestra=int(input("Por favor digite el numero de la muestra que desea organizar "))
+            if muestra >lt.size(videos):
+                det=True                
+                print("Su muestra es muy grande digite otra cantidad")
+            else:
+                det=False
+        
+        type_sort=int(input("Por favor digite 1 si quiere que su tipo de ordenamiento sea INSERTION\nPor favor digite 2 si quiere que su tipo de ordenamiento sea SELECTION\nPor favor digite 3 si quiere que su tipo de ordenamiento sea SHELLSORT "))
+        print("Ordenando los videos... Por favor espere en linea")
+        videos_ordenados=sortVideos(catalog,muestra,type_sort)
+        tiempo=videos_ordenados[0]
+        print("Para la muestra de ",muestra," elementos y con la estructura de datos tipo: ",Tipo," el tiempo que tardo el programa es: ",tiempo,"milisegundos.")
+      
     
     elif int(inputs[0]) == 3:
         pass

@@ -26,8 +26,11 @@
 
 
 import config as cf
+import time
 from DISClib.ADT import list as lt
-from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import shellsort as she
+from DISClib.Algorithms.Sorting import selectionsort as se
+from DISClib.Algorithms.Sorting import insertionsort as inse
 assert cf
 
 """
@@ -67,6 +70,9 @@ def addCategoryID(catalog, category):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+def cmpVideosByViews(video1,video2):
+    comparison=float(video2['views'])>float(video1['views'])
+    return comparison
 
 def getBestVideos(catalog, number):
 
@@ -76,3 +82,21 @@ def getBestVideos(catalog, number):
         video = lt.getElement(videos, cont)
         lt.addLast(bestvideos, video)
     return bestvideos
+
+def sortVideos(catalog, size,typesort):
+    sub_list = lt.subList(catalog['videos'], 1, size)
+    sub_list = sub_list.copy()
+    start_time = time.process_time()
+    
+    
+    if typesort==1:
+        sorted_list=inse.sort(sub_list,cmpVideosByViews)
+    elif typesort==2:
+        sorted_list=se.sort(sub_list,cmpVideosByViews)
+    elif typesort==3:
+        sorted_list=she.sort(sub_list,cmpVideosByViews)
+    else:
+        pass
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list
