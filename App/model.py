@@ -67,3 +67,12 @@ def addCategoryID(catalog, category):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+
+def getBestVideos(catalog, number):
+
+    videos = catalog['videos']
+    bestvideos = lt.newList()
+    for cont in range(1, number+1):
+        video = lt.getElement(videos, cont)
+        lt.addLast(bestvideos, video)
+    return bestvideos

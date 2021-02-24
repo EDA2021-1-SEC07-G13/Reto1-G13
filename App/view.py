@@ -106,7 +106,9 @@ while True:
         
 
     elif int(inputs[0]) == 2:
-        pass
+        number = input("Buscando los TOP ?: ")
+        topvideos = controller.getBestBooks(catalog, int(number))
+        printBestVideos(videos)
     
     elif int(inputs[0]) == 3:
         pass
