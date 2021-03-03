@@ -31,6 +31,8 @@ from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as she
 from DISClib.Algorithms.Sorting import selectionsort as se
 from DISClib.Algorithms.Sorting import insertionsort as inse
+from DISClib.Algorithms.Sorting import quicksort as quick
+from DISClib.Algorithms.Sorting import mergesort as merge
 assert cf
 
 """
@@ -95,6 +97,10 @@ def sortVideos(catalog, size,typesort):
         sorted_list=se.sort(sub_list,cmpVideosByViews)
     elif typesort==3:
         sorted_list=she.sort(sub_list,cmpVideosByViews)
+    elif typesort==4:
+        sorted_list=quick.sort(sub_list,cmpVideosByViews)
+    elif typesort==5:
+        sorted_list=merge.sort(sub_list,cmpVideosByViews)
     else:
         pass
     stop_time = time.process_time()

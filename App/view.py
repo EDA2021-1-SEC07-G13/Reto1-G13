@@ -81,7 +81,7 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         Tipo=None
-        input2=input('Ponga 1 si quiere la representacion en tipo arreglo o 2 si la quiere con lista encadenada')
+        input2=input('Ponga 1 si quiere la representacion en tipo arreglo o 2 si la quiere con lista encadenada\n')
         print("Cargando información de los archivos ....")
         if int(input2)==1:
             Tipo='ARRAY_LIST'
@@ -102,14 +102,17 @@ while True:
     elif int(inputs[0]) == 2:
         det=True
         while det==True:
-            muestra=int(input("Por favor digite el numero de la muestra que desea organizar "))
+            muestra=int(input("Por favor digite el numero de la muestra que desea organizar\n"))
             if muestra >lt.size(videos):
                 det=True                
                 print("Su muestra es muy grande digite otra cantidad")
             else:
                 det=False
-        
-        type_sort=int(input("Por favor digite 1 si quiere que su tipo de ordenamiento sea INSERTION\nPor favor digite 2 si quiere que su tipo de ordenamiento sea SELECTION\nPor favor digite 3 si quiere que su tipo de ordenamiento sea SHELLSORT "))
+        eleccion=int(input("Por favor digite 1 si quiere un algrotivo iterativo\nPor favor digite 2 si quiere un algoritmo recursivo\n"))
+        if eleccion==1:
+            type_sort=int(input("Por favor digite 1 si quiere que su tipo de ordenamiento sea INSERTION\nPor favor digite 2 si quiere que su tipo de ordenamiento sea SELECTION\nPor favor digite 3 si quiere que su tipo de ordenamiento sea SHELLSORT\n"))
+        elif eleccion==2:
+            type_sort=int(input("Por favor digite 4 si quiere que su tipo de ordenamiento sea QUICK\nPor favor digite 5 si quiere que su tipo de ordenamiento sea MERGE\n"))
         print("Ordenando los videos... Por favor espere en linea")
         videos_ordenados=sortVideos(catalog,muestra,type_sort)
         tiempo=videos_ordenados[0]
