@@ -68,8 +68,8 @@ def printcategoriesList(categoryID):
 def print1stelement(videos,tipo):
     primero=lt.firstElement(videos)
     print("Title: {} Channel: {} Trending Date: {} Country: {} Views: {} Likes: {} Dislikes: {}  ".format(primero['title'],primero["channel_title"],primero["trending_date"],primero["country"],primero["views"],primero["likes"],primero["dislikes"]))
-def sortVideos(catalog, size,typesort):
-    return controller.sortVideos(catalog, size,typesort)
+def sortVideos(catalog):
+    return controller.sortVideos(catalog)
 
 catalog = None
 
@@ -98,25 +98,21 @@ while True:
         categoryID = catalog['category-id']
         printcategoriesList(categoryID)
         
+        
 
     elif int(inputs[0]) == 2:
-        det=True
-        while det==True:
-            muestra=int(input("Por favor digite el numero de la muestra que desea organizar\n"))
-            if muestra >lt.size(videos):
-                det=True                
-                print("Su muestra es muy grande digite otra cantidad")
-            else:
-                det=False
-        eleccion=int(input("Por favor digite 1 si quiere un algrotivo iterativo\nPor favor digite 2 si quiere un algoritmo recursivo\n"))
-        if eleccion==1:
-            type_sort=int(input("Por favor digite 1 si quiere que su tipo de ordenamiento sea INSERTION\nPor favor digite 2 si quiere que su tipo de ordenamiento sea SELECTION\nPor favor digite 3 si quiere que su tipo de ordenamiento sea SHELLSORT\n"))
-        elif eleccion==2:
-            type_sort=int(input("Por favor digite 4 si quiere que su tipo de ordenamiento sea QUICK\nPor favor digite 5 si quiere que su tipo de ordenamiento sea MERGE\n"))
-        print("Ordenando los videos... Por favor espere en linea")
-        videos_ordenados=sortVideos(catalog,muestra,type_sort)
-        tiempo=videos_ordenados[0]
-        print("Para la muestra de ",muestra," elementos y con la estructura de datos tipo: ",Tipo," el tiempo que tardo el programa es: ",tiempo,"milisegundos.")
+        pais=input("Ingrese el pais por el que quiere filtrar \n")
+        categoria=input("Ingrese la categoria por la que quiere filtrar \n")
+        lista_filtrada=controller.filtrarvideos(catalog,pais,categoria)
+        lista_filtrada_ordenada=controller.sortVideos(lista_filtrada)
+        n = int(input('Numero de videos que quiere listar: '))
+
+
+        
+        for i in range(0,n):
+            print('*  *  *')
+            print1stelement(lista_filtrada_ordenada, tipo = 1)
+            lt.removeFirst(lista_filtrada_ordenada)
       
     
     elif int(inputs[0]) == 3:

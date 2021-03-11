@@ -68,7 +68,10 @@ def getBestVideos(catalog,number):
     return bestvideos
 
 # Funciones de ordenamiento
-def sortVideos(catalog, size,typesort):
-    x= model.sortVideos(catalog, size,typesort)
+def sortVideos(catalog):
+    x= model.sortVideos(catalog)
     return x
 # Funciones de consulta sobre el catálogo
+def filtrarvideos(catalog,pais,categoria):
+    videosfiltrados=model.filtrarvideos(catalog,pais,categoria)
+    return videosfiltrados

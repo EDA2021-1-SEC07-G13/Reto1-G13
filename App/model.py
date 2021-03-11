@@ -73,7 +73,7 @@ def addCategoryID(catalog, category):
 
 # Funciones de ordenamiento
 def cmpVideosByViews(video1,video2):
-    comparison=float(video2['views'])>float(video1['views'])
+    comparison=float(video2['views'])<float(video1['views'])
     return comparison
 
 def getBestVideos(catalog, number):
@@ -85,24 +85,71 @@ def getBestVideos(catalog, number):
         lt.addLast(bestvideos, video)
     return bestvideos
 
-def sortVideos(catalog, size,typesort):
-    sub_list = lt.subList(catalog['videos'], 1, size)
-    sub_list = sub_list.copy()
-    start_time = time.process_time()
-    
-    
-    if typesort==1:
-        sorted_list=inse.sort(sub_list,cmpVideosByViews)
-    elif typesort==2:
-        sorted_list=se.sort(sub_list,cmpVideosByViews)
-    elif typesort==3:
-        sorted_list=she.sort(sub_list,cmpVideosByViews)
-    elif typesort==4:
-        sorted_list=quick.sort(sub_list,cmpVideosByViews)
-    elif typesort==5:
-        sorted_list=merge.sort(sub_list,cmpVideosByViews)
-    else:
-        pass
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg, sorted_list
+def cmpVideosByDays(video1,video2):
+    comparison=float(video2['dias'])<float(video1['dias'])
+    return comparison
+    '''
+def conteoDays(catalog):
+    videos=catalog['videos']['elements']
+    lista=lt.newList('ARRAY_LIST')
+    for i in videos:   
+        if not i['video_id'] in lista:
+            listaaa= [i['video_id'] , 1]
+            lt.addLast(lista,listaaa)
+        elif:
+               lt.changeInfo((lista, , [i['video_id'] , 1])
+'''
+            
+
+def filtrarvideos(catalog,pais,categoria):
+    videos=catalog['videos']
+    videos2=lt.newList('ARRAY_LIST')
+    categorias=catalog['category-id']['elements']
+    if categoria=='Film & Animation':
+        id1="1"
+    else:    
+        for t in categorias:
+            l=t['id\tname']
+            pos=l.find(" ")
+            category=l[pos+1:]
+            if category==categoria:
+                pos2=l.find('\t')
+                id1=l[:pos2]
+    m=1
+    while m<=lt.size(videos):
+        i=lt.getElement(videos,m)
+        if i["country"]== pais and i["category_id"]==id1:
+            lt.addLast(videos2,i)
+            
+        m+=1
+    return videos2
+
+
+def filtrarvideos_categorias(catalog, categoria):
+    videos=catalog['videos']
+    videos2=lt.newList('ARRAY_LIST')
+    categorias=catalog['category-id']['elements']
+    if categoria=='Film & Animation':
+        id1="1"
+    else:    
+        for t in categorias:
+            l=t['id\tname']
+            pos=l.find(" ")
+            category=l[pos+1:]
+            if category==categoria:
+                pos2=l.find('\t')
+                id1=l[:pos2]
+    m=1
+    while m<=lt.size(videos):
+        i=lt.getElement(videos,m)
+        if i["category_id"]==id1:
+            lt.addLast(videos2,i)
+            
+        m+=1
+    return videos2
+
+def sortVideos(catalog):
+           
+    sorted_list=merge.sort(catalog,cmpVideosByViews)
+
+    return sorted_list
